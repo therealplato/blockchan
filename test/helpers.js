@@ -1,0 +1,1 @@
+BCJASMINE = {hello:"world"}
