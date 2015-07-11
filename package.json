@@ -1,0 +1,27 @@
+{
+  "name": "blockchan",
+  "version": "0.1.0",
+  "description": "organize messages in threaded blocktrees",
+  "main": "index.js",
+  "scripts": {
+    "test": "node tests/unit-backend/runJasmine.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/therealplato/blockchan.git"
+  },
+  "keywords": [
+    "blockchain",
+    "blocktree",
+    "message",
+    "forum",
+    "comment",
+    "decentralized"
+  ],
+  "author": "therealplato@gmail.com",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/therealplato/blockchan/issues"
+  },
+  "homepage": "https://github.com/therealplato/blockchan"
+}
