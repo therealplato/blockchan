@@ -1,46 +1,63 @@
-var Storage = require('./lib/storage.js')();
 // Blockchan 0.1.0
-module.exports = function(opts){
-  var BC = {};
-  BC.seed = function(seed){
-    if(seed){
-      return Trees.find(seed);
-    } else {
-      return Trees.grow('blockchan');
-    }
-  };
-  return BC;
-}
+var Storage = require('./lib/storage.js')();
+var BC = {};
+module.exports = BC;
 
-function Leaf(content, parent){
-  this.seed = parent.seed;
+BC.grow = function(seed){
+  if(seed){
+    return Trees.grow(seed);
+  } else {
+    return Trees.grow('blockchan');
+  }
+};
+
+function Leaf(config){
+  this.seed = config.seed;
+  this.tree = config.tree;
+  this.children = [];
   this.content = content;
 }
 
-function Trees(){
-  var OneTree = function(config){
-    this.seed = config.seed;
-    this.getter = Storage.memoryAdapter.getter;
-    this.setter = Storage.memoryAdapter.setter;
-    return this;
-  }
-  OneTree.prototype.bud = function(content){
-    this.grow(new Leaf(content, this));
-  }
-  OneTree.prototype.grow = function(leaf){
+// Create a leaf replying to this one:
+Leaf.prototype.bud = function(content){
+  this.grow(new Leaf(content, this));
+}
+Leaf.prototype.children = function(){
+  this.tree.adapter.getChildren()
+}
 
-  }
-  OneTree.prototype.data = function(adapter){
-    this.setter = adapter.setter;
-    this.getter = adapter.getter;
-  }
+var Tree = function(config){
+  this.seed = config.seed;
+  this.adapter = Storage.memoryAdapter;
+  this.root = new Leaf({
+    seed: config.seed,
+    parent: '',
+    tree: this,
+  });
+  return this;
+}
 
-  var Trees = {};
-  Trees.grow = function(seed){
-    return new OneTree({seed: seed});
+// Ask the adapter for children of the root
+// Recursively continue until the adapter reports no further leaves
+Tree.prototype.walkGet = function(){
+  var self = this;
+  function loadChildren(leaf){
+    return self.root.children()
   }
+}
 
-  Trees.find = function(seed){
+Tree.prototype.data = function(adapter){
+  this.setter = adapter.setter;
+  this.getter = adapter.getter;
+}
 
-  }
+var Trees = {};
+Trees.grow = function(seed){
+  var result = new Tree({seed: seed});
+  return result;
+}
+
+Trees.find = function(seed){
+
+}
 }

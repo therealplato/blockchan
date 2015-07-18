@@ -1,11 +1,11 @@
-console.log('memoryAdapter.spec.js')
 describe('memoryAdapter.js', function(){
   var ma;
-  it('requires', function(){
+  it('requires, returning an object', function(){
     function tryRequire(){
       ma = require('../../lib/memoryAdapter.js');
     }
     expect(tryRequire).not.toThrow();
+    expect(typeof ma).toBe('object');
   })
 
   it('has getter and setter functions', function(){
