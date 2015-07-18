@@ -1,4 +1,6 @@
-describe('memoryAdapter.js', function(){
+var Storage = require('../storage.js')();
+
+xdescribe('memoryAdapter.js', function(){
   var ma;
   it('requires, returning an object', function(){
     function tryRequire(){
@@ -12,4 +14,6 @@ describe('memoryAdapter.js', function(){
     expect(typeof ma.getter).toBe('function');
     expect(typeof ma.setter).toBe('function');
   })
+
+  it('')
 })

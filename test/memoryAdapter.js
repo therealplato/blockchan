@@ -22,7 +22,7 @@ module.exports = {
   writeLeaf: function(leaf, callback){
     var current = data[config.hash];
     if(current){
-      var iToRemove = indexOf(current));
+      var iToRemove = indexOf(current);
       var left = dataFlat.slice(0, iToRemove);
       var right = dataFlat.slice(iToRemove+1);
       dataFlat = left.concat(right);

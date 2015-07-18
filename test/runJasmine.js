@@ -16,9 +16,10 @@ jasmine.loadConfig({
 });
 
 var terminalReporter = new reporters.TerminalReporter({
-  verbosity: 3,
   color: true,
-  showStack: true
+  verbosity: 3,
+  //verbosity: 3,
+  //showStack: true
 })
 jasmine.addReporter(terminalReporter);
 
